@@ -13,7 +13,7 @@ class Order < ApplicationRecord
       transitions from: :pending, to: :confirmed
     end
 
-    event :start_preparing do
+    event :start_preparing, display: "Prepare" do
       transitions from: :confirmed, to: :preparing
     end
 

@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import { Form } from "@inertiajs/vue3"
+
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import { Button, type ButtonVariants } from "@/components/ui/button"
 import {
   Card,
   CardAction,
@@ -10,9 +12,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { order as orderPath } from "@/routes"
 import type { Order } from "@/types"
 
-import { formatStatus, orderActions, orderStatusVariant } from "."
+import { formatStatus, orderStatusVariant } from "."
 
 defineProps<{ order: Order }>()
 
@@ -21,6 +24,10 @@ function formatTotal(cents: number) {
     style: "currency",
     currency: "BRL",
   })
+}
+
+function buttonVariant(variant: string): ButtonVariants["variant"] {
+  return variant === "destructive" ? "destructive" : "default"
 }
 </script>
 
@@ -40,16 +47,19 @@ function formatTotal(cents: number) {
     <CardContent class="px-4 font-mono text-lg">
       {{ formatTotal(order.total_cents) }}
     </CardContent>
-    <CardFooter v-if="orderActions[order.status]?.length" class="gap-2 px-4">
-      <Button
-        v-for="action in orderActions[order.status]"
-        :key="action.label"
-        type="button"
-        size="sm"
-        :variant="action.variant"
+    <CardFooter v-if="order.actions.length" class="gap-2 px-4">
+      <Form
+        v-for="action in order.actions"
+        :key="action.event"
+        :action="orderPath(order.id)"
+        :options="{ preserveScroll: true }"
+        disable-while-processing
       >
-        {{ action.label }}
-      </Button>
+        <input type="hidden" name="event" :value="action.event" />
+        <Button type="submit" size="sm" :variant="buttonVariant(action.variant)">
+          {{ action.label }}
+        </Button>
+      </Form>
     </CardFooter>
   </Card>
 </template>

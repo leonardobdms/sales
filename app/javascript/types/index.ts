@@ -1,4 +1,4 @@
-export type { HomeIndex, Order } from "./serializers"
+export type { HomeIndex, Order, StatusAction } from "./serializers"
 
 export type FlashData = {
   notice?: string
