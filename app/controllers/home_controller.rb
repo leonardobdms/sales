@@ -2,5 +2,6 @@
 
 class HomeController < InertiaController
   def index
+    @orders = Order.all
   end
 end

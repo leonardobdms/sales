@@ -42,7 +42,11 @@ gem "inertia_rails", "~> 3.21"
 # Brings Rails named routes to javascript
 gem "typelizer"
 
+gem "aasm"
+
 group :development, :test do
+  gem "faker"
+
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
 
