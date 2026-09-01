@@ -34,7 +34,10 @@ function buttonVariant(variant: string): ButtonVariants["variant"] {
 <template>
   <Card class="gap-4 py-4">
     <CardHeader class="px-4">
-      <CardTitle class="truncate">{{ order.customer_name }}</CardTitle>
+      <CardTitle class="flex min-w-0 items-center gap-2">
+        <span class="font-mono text-muted-foreground shrink-0">#{{ order.id }}</span>
+        <span class="truncate">{{ order.customer_name }}</span>
+      </CardTitle>
       <CardDescription class="line-clamp-2">
         {{ order.address }}
       </CardDescription>
