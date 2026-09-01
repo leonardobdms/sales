@@ -4,7 +4,7 @@ class OrderEventPublisher
   class << self
     attr_accessor :enabled
 
-    self.enabled = !Rails.env.test?
+    @enabled = !Rails.env.test?
 
     def created(order)
       publish(
