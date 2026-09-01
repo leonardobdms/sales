@@ -36,15 +36,15 @@ class Order < ApplicationRecord
   private
 
   def publish_created
-    OrderEventPublisher.created(self)
+    ::OrderEventPublisher.created(self)
   end
 
   def publish_status_event
     return unless saved_change_to_status?
 
     case status
-    when "confirmed" then OrderEventPublisher.confirmed(self)
-    when "cancelled" then OrderEventPublisher.cancelled(self)
+    when "confirmed" then ::OrderEventPublisher.confirmed(self)
+    when "cancelled" then ::OrderEventPublisher.cancelled(self)
     end
   end
 end
