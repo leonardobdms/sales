@@ -2,15 +2,12 @@ require "faker"
 
 Faker::Config.locale = "pt-BR"
 
-SEED_COUNT = 25
-
-puts "Seeding #{SEED_COUNT} orders..."
-
+OrderEventPublisher.enabled = false
 Order.destroy_all
 
 statuses = Order.aasm.states.map(&:name)
 
-SEED_COUNT.times do |index|
+25.times do |index|
   Order.create!(
     customer_name: Faker::Name.name,
     address: Faker::Address.full_address,

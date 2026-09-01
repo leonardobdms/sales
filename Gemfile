@@ -75,3 +75,5 @@ group :test do
 end
 gem "alba"
 gem "alba-inertia"
+
+gem "karafka", "~> 2.6"
