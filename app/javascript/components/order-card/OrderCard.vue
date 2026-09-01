@@ -58,6 +58,7 @@ function buttonVariant(variant: string): ButtonVariants["variant"] {
         :options="{ preserveScroll: true }"
         disable-while-processing
       >
+        <input type="hidden" name="_token" :value="$page.props.csrf_token">
         <input type="hidden" name="event" :value="action.event" />
         <Button type="submit" size="sm" :variant="buttonVariant(action.variant)">
           {{ action.label }}
