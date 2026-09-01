@@ -1,0 +1,22 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table orders {
+  id integer [primary key]
+  customer_name varchar [not null]
+  status varchar [not null, default: 'pending']
+  total_cents integer [not null]
+  address varchar [not null]
+  created_at timestamp
+  updated_at timestamp
+
+  Note: '''
+    Stores orders created by the Sales platform.
+
+    customer_name must have at least 3 characters.
+
+    total_cents must be greater than 0.
+
+    Status values: pending, confirmed, preparing, shipped, delivered, cancelled.
+  '''
+}
